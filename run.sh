@@ -1,1 +1,1 @@
-dune exec src/main.exe
+dune exec src/main.exe -- "$@"
