@@ -243,7 +243,7 @@ Extraction Implicit eqseqP [T].
      (* Definition mask : forall T : Type, bitseq -> seq T -> seq T. *)
      (* Definition subseq : forall T : eqType, seq T -> seq T -> bool. *)
      (* Definition rem : forall T : eqType, T -> seq T -> seq T. *)
-     (* Definition map : forall T1 T2 : Type, (T1 -> T2) -> seq T1 -> seq T2. *)
+Extract Inlined Constant seq.map => "(fun f xs -> List.map ~f xs)".
      (* Definition pmap : forall aT rT : Type, (aT -> option rT) -> seq aT -> seq rT. *)
      (* Definition iota : nat -> nat -> seq nat. *)
      (* Definition mkseq : forall T : Type, (nat -> T) -> nat -> seq T. *)
