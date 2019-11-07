@@ -247,7 +247,7 @@ Extract Inlined Constant seq.map => "(fun f xs -> List.map ~f xs)".
      (* Definition pmap : forall aT rT : Type, (aT -> option rT) -> seq aT -> seq rT. *)
      (* Definition iota : nat -> nat -> seq nat. *)
      (* Definition mkseq : forall T : Type, (nat -> T) -> nat -> seq T. *)
-     (* Definition foldr : forall T R : Type, (T -> R -> R) -> R -> seq T -> R. *)
+Extract Inlined Constant foldr => "(fun f init xs -> List.fold_right ~f ~init xs)".
      (* Definition sumn : seq nat -> nat. *)
      (* Definition foldl : forall T R : Type, (R -> T -> R) -> R -> seq T -> R. *)
      (* Definition pairmap : forall T1 T2 : Type, (T1 -> T1 -> T2) -> T1 -> seq T1 -> seq T2. *)

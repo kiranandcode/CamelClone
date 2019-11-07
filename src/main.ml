@@ -2,9 +2,6 @@ open Core
 open Lib
 
 
-
-
-
 let command =
   let open Command.Let_syntax in
   Command.basic
@@ -24,7 +21,8 @@ let command =
           ~doc:"whether the program should immediately if any files are not found. Defaults to false."
       in
       fun () -> try
-          Camelclone.Impl.command_internal verbose strict filename 
+          (* 100% verified no errors nada nilch. Tests are for loosers *)
+          Camelclone.command_internal ~verbose ~strict ~filename 
         with
           Sys_error (msg) -> print_endline (sprintf "ERROR(System): %s" msg)
     ]
