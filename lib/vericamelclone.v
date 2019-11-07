@@ -96,8 +96,23 @@ Module Proofs.
         [seq State_get_repository initialState file
         | file <- snd (fst (ConcreteParams.load_operation_data initialState o_name))].
     (* Todo in a bit *)
-  Admitted.
+    move=> verb strict o_name //=; rewrite/command_internal/command_internal'//=.
+    case: ( Hvalid_load_operation_data o_name) => [[startdir files]] Hstate; rewrite Hstate //=.
+    rewrite Hvalid_post_task_operations/snd //=.
+    clear Hstate; elim: files => [| file files Hfiles]; first by apply Hinit_State_git_repositories.
 
+    move=>//=.
+
+
+    erewrite <-Hvalid_perform_git_operations with
+        (file := file) (verbose:=verb) (strict:=strict) (startdir:=startdir) (state:= (foldr
+          (fun (file0 : ConcreteParams.t) (state' : State) =>
+           let (_, y) := ConcreteParams.perform_git_operations state' verb strict startdir file0 in y)
+          initialState files)).
+    by rewrite -Hfiles -(Hvalid_State_get_repository file initialState _).
+    by case: (ConcreteParams.perform_git_operations _ _ _ _) => [[]] //=.
+  Qed.
+  
 End Proofs.    
     
 
