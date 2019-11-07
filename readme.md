@@ -1,7 +1,36 @@
-# OThudd - Ocaml Theorem Driven Development
-Template for software development workflow using theorems instead of tests.
+# Camel Clone - 0% tested, 100% correct!
+Example verified program built using Othudd theorem driven development.
 
-<TODO add synopsis>
+Camel Clone implements a fairly simple algorithm that, given a
+sequence of file directories containing git repositories as input from
+a configuration file, navigates to each repository then commits and
+pushes any changes to their respective remotes.
+
+```
+Push changes to selected local repositories online.
+
+  camelclone.exe 
+
+Intended to be run as a chron job for syncing repositories used for coordination
+
+=== flags ===
+
+  [-config configuration]  file to load repositories, defaults to ~/.camelclone
+  [-strict]                whether the program should immediately exit if any files are not
+                           found. Defaults to false.
+  [-verbose]               whether the program should print detailed information.
+                           Defaults to false.
+```
+
+
+As this software was developed using a theorem driven development
+ cycle, it comes with a formally verified proof of correctness - see
+ `lib/vericamelclone.v`.
+
+Hence, CamelClone is 0% tested, but certainly 100% correct.
+
+*Just you try adding a bug pull request.*
+
 
 ## Requirements
  - Coq - 8.9
@@ -11,41 +40,14 @@ Template for software development workflow using theorems instead of tests.
  - Core
 
 ## Setup
-1. Clone this repository
-
-```
-git clone <site-name>/thudd.git
-```
-
-2. Edit dune file to name project to liking.
-
-3. Run make
+1. Run make
 
 ```
 make
 ```
 
 4. Verify it works with
-
 ```
 make run
 ```
 
-## Development Workflow
-
-See `lib/examplecoq.ml`,`lib/examplecoqinst.ml` for concrete examples of the following.
-
-1. For experimental library stuff, build it first in `src/` and figure out a good abstract interface for the core logic.
-2. Construct an abstract version of this interface in `lib/` in Coq as a Module Type, capturing any pre/postconditions as axioms of the module type.
-3. Implement and prove core logic given the preconditions/postconditions in abstract form,  taking a module conforming to the type specified in 2. as a parameter.
-4. At the end of the file add `Extract "<file-name>" <abstract-module-name>`.
-5. Run `make` to build an ocaml version of the code.
-6. Define a concrete Ocaml module in the `lib/` directory that imports the constructed abstract core logic and instantiates it with a concrete type. 
-7. Use verified module in `src/` and repeat.
-
-Will add more if more comes up
-
-## Note: Updates
- If you are reading this from micro$oft's github, then be advised that
- updates will be first pushed to the version hosted on Gitlab, and
- only then, maybe will they be pushed to micro$oft's github.
